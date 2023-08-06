@@ -1,0 +1,135 @@
+<mat-toolbar (click)="ngOnInit()" class="navControls">
+    <!--<a class="navControls__branding branding branding--compact active" routerlink="/home" routerlinkactive="active" href="/home">
+        <span class="branding_white">IPO Enabler</span>
+    </a>-->
+    <span (click)="Gotohome()" class="branding_white">IPO Enabler</span>
+    <div class="spacer"></div>
+    <ul>
+        <li>
+            <a href="#">Setup Questionnaire Library</a>
+            <ul class="name">
+                <li *ngIf="displayUser">
+                    <a [routerLink]="['/setupQuestionnaire',userId,projectId,userRoleId]">Setup Questionnaire Library</a>
+                </li>
+                <li>
+                    <a [routerLink]="['/questions',userId,projectId,userRoleId]">Questions </a>
+                </li>
+                <li *ngIf="displayUser">
+                    <a [routerLink]="['/scatterplot',userId,projectId,userRoleId]">Project Overview</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="notification()">Notification</button>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="downloadPdf()">User Guide</button>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="openContact()">Contact</button>
+    <button mat-button *ngIf="diableProjectOverview" activeroute="nav__link--active" class="nav__link" (click)="displayUsers()">Users</button>
+    <a mat-button  activeroute="nav__link--active" class="nav__link" routerlink="/login" href="/login">Logout</a>
+</mat-toolbar>
+<div class="tabHeader">
+    <button *ngIf="displayUser" class="tabHeader__anchor tabHeader--active" (click)="GotoSetupQuestionnaire()">
+        <div class="tabHeader__title">
+            Setup Questionnaire Library
+        </div>
+    </button>
+    <button class="tabHeader__anchor tabHeader--active" >
+        <div class="tabHeader__title" (click)="ngOnInit()">
+            Questions
+        </div>
+    </button>
+    <button *ngIf="diableProjectOverview" class="tabHeader__anchor tabHeader--active" routerlink="/overview/profit-loss" routerlinkactive="tabHeader--active" href="/overview/profit-loss">
+        <div class="tabHeader__title">
+            Project Overview
+        </div>
+    </button>
+</div>
+<div class="admin-layout--flex admin-layout--fullWidth outer-div">
+    <div class="content-div admin-layout--hasFlexContainer">
+        <div class="table-div adminTableList">
+            <div class="adminPanel admin-main-div">
+                <table class="adminPanel admin-main-div">
+                    <thead>
+                        <tr class="row-div head-div">
+                            <th class="cell-div"> Functional Area </th>
+                            <th class="cell-div"> Industry </th>
+                            <th class="cell-div"> Question </th>
+                            <!--<th class="cell-div"> Project </th>-->
+                            <th class="cell-div">
+                                <button mat-button activeroute="nav__link--active" class="nav__link" >Add User</button> 
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="body-div">
+                        <tr *ngFor="let user of questionsLibrary" class="row-div in-div-body">
+                             <th class="cell-div">
+                                {{user.functionalAreaName}}
+                            </th>
+                            <th class="cell-div">
+                                {{user.industryName}}
+                            </th>
+                            <th class="cell-div" title="{{user.questionName}}">
+                                {{user.questionName}}
+                            </th>
+                            <th class="cell-div">
+                                <button mat-button activeroute="nav__link--active" (click)="viewQuestion(user.questionnaireId)" class="nav__link" >Give Responses</button> 
+                            </th>
+                            
+                        </tr>
+                 </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="detail-div">
+            <div _ngcontent-c9 class="adminPanel detail-main-div">
+                <div _ngcontent-c9 class="head-div1">
+                    <p _ngcontent-c9 class="detail-row-heading">
+                        Question
+                    </p>
+                </div>
+            </div>
+            <div _ngcontent-c9>
+                <table _ngcontent-c9>                 
+                    <tr class="row-div1 in-div-body"  _ngcontent-c9>
+                        <span>Industry: {{questionLibrary.industryName }}</span><br>
+                    </tr>
+                    <tr class="row-div1 in-div-body"  _ngcontent-c9>
+                        <span >Functional Area:{{questionLibrary.functionalAreaName }}</span>
+                    </tr>
+                    <tr class="row-div1 in-div-body" _ngcontent-c9>
+                        <span >Question:{{questionLibrary.questionName }}</span>
+                    </tr>
+                    <tr class="row-div2 in-div-body" _ngcontent-c9>
+                        <span >Question Description:{{questionLibrary.questionDescription }}</span>
+                    </tr>
+                    <tr class="row-div1 in-div-body" _ngcontent-c9>
+                        <button [disabled]="questionsLibrary.length==0" mat-button  activeroute="nav__link--active" (click)="changeVerylow()" [ngClass]="{'green':veryLowButton}" >Very Low</button> 
+                        <button [disabled]="questionsLibrary.length==0" mat-button activeroute="nav__link--active" (click)="changeLow()" [ngClass]="{'green':lowButton}" >Low</button> 
+                        <button [disabled]="questionsLibrary.length==0" mat-button activeroute="nav__link--active" (click)="changeMedium()" [ngClass]="{'green':mediumButton}" >Medium</button> 
+                        <button [disabled]="questionsLibrary.length==0" mat-button activeroute="nav__link--active" (click)="changeHigh()" [ngClass]="{'green':highButton}" >High</button>                         
+                        <button [disabled]="questionsLibrary.length==0" mat-button activeroute="nav__link--active" (click)="changeVeryHigh()" [ngClass]="{'green':veryHighButton}" >Very High</button> 
+                    </tr>
+                    <tr class="row-div3 in-div-body" _ngcontent-c9>
+                        <span >Impact</span>
+                        
+                    </tr>
+                    <tr class="row-div1 in-div-body" _ngcontent-c9>
+                        <button [disabled]="questionsLibrary.length==0" mat-button  activeroute="nav__link--active" (click)="changeImpactLow()" [ngClass]="{'green':impactLow}" >Low</button> 
+                        <button [disabled]="questionsLibrary.length==0" mat-button activeroute="nav__link--active" (click)="changeImpactMedium()" [ngClass]="{'green':impactMedium}" >Medium</button> 
+                        <button [disabled]="questionsLibrary.length==0" mat-button activeroute="nav__link--active" (click)="changeImpactHigh()" [ngClass]="{'green':impactHigh}" >High</button>  
+                    </tr>
+                    <tr class="row-div3 in-div-body" _ngcontent-c9>
+                        <span >Effort</span>
+                    </tr>
+                    <tr class="row-div1 in-div-body" _ngcontent-c9>
+                        <button [disabled]="questionsLibrary.length==0" mat-button  activeroute="nav__link--active" (click)="changeEffortLow()" [ngClass]="{'green':effortLow}" >Low</button> 
+                        <button [disabled]="questionsLibrary.length==0" mat-button activeroute="nav__link--active" (click)="changeEffortMedium()" [ngClass]="{'green':effortMedium}" >Medium</button> 
+                        <button [disabled]="questionsLibrary.length==0" mat-button activeroute="nav__link--active" (click)="changeEffortHigh()" [ngClass]="{'green':effortHigh}" >High</button>  
+                    </tr>
+                    <tr class="row-div1 in-div-body" _ngcontent-c9>
+                        <button (click)="saveQuestionResponse(questionLibrary)" class="loginRegister__btn btn btn--secondary">Save</button>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

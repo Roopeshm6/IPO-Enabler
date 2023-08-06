@@ -1,0 +1,134 @@
+<mat-toolbar class="navControls">
+    <span (click)="Gotohome()" class="branding_white">IPO Enabler</span>
+    <div class="spacer"></div>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="notification()">Notification</button>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="downloadPdf()">User Guide</button>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="openContact()">Contact</button>
+    <button mat-button *ngIf="displayUser" activeroute="nav__link--active" class="nav__link" (click)="displayUsers()">Users</button>
+    <a mat-button  activeroute="nav__link--active" class="nav__link" routerlink="/login" href="/login">Logout</a>
+</mat-toolbar>  
+<div class="admin-layout--flex admin-layout--fullWidth outer-div">
+    <div class="content-div admin-layout--hasFlexContainer">
+        <div class="table-div adminTableList">
+            <div class="adminPanel admin-main-div">
+                <table class="adminPanel admin-main-div">
+                    <thead>
+                        <tr class="row-div head-div">
+                            <th class="cell-div"> First Name </th>
+                            <th class="cell-div"> Last Name </th>
+                            <th class="cell-div"> Email </th>
+                            <!--<th class="cell-div"> Project </th>-->
+                            <th class="cell-div">
+                                <button mat-button activeroute="nav__link--active" class="nav__link" (click)="addUser()">Add User</button> 
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody class="body-div">
+                        <tr *ngFor="let user of users" class="row-div in-div-body">
+                             <th class="cell-div">
+                                {{user.firstname}}
+                            </th>
+                            <th class="cell-div">
+                                {{user.lastname}}
+                            </th>
+                            <th class="cell-div">
+                                {{user.email}}
+                            </th>
+                            <!--<th class="cell-div">
+                                
+                            </th>-->
+                            <th class="cell-div1">
+                                <button mat-button activeroute="nav__link--active" class="nav__link" (click)="viewUser(user)">View</button>                    
+                                <button mat-button activeroute="nav__link--active" class="nav__link" (click)="editUser(user)">Edit</button>
+                                <button mat-button activeroute="nav__link--active" class="nav__link" (click)="deleteUser(user)">Delete</button>
+                            </th>
+                        </tr>
+                 </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="detail-div">
+            <div _ngcontent-c9 class="adminPanel detail-main-div">
+                <div _ngcontent-c9 class="head-div1">
+                    <p _ngcontent-c9 class="detail-row-heading">
+                        User Details
+                    </p>
+                </div>
+            </div>
+            <div _ngcontent-c9>
+                <table _ngcontent-c9>                 
+                    <tr class="row-div1 in-div-body"  _ngcontent-c9>
+                        <td _ngcontent-c9 class="cell-div2">First Name</td>
+                        <td _ngcontent-c9 class="cell-div2">
+                            <span *ngIf="editUserDetails? '':userRole.firstname">{{!editUserDetails?userRole.firstname:''}}</span>
+                            <input *ngIf="editUserDetails?userRole.firstname:''" type="email" [value]="userRole.firstname">
+                        </td>
+                    </tr>
+                    <tr class="row-div1 in-div-body"  _ngcontent-c9>
+                        <td _ngcontent-c9 class="cell-div2">Last Name</td>
+                        <td _ngcontent-c9 class="cell-div2">
+                            <span *ngIf="editUserDetails? '':userRole.lastname">{{!editUserDetails?userRole.lastname:''}}</span>
+                            <input *ngIf="editUserDetails?userRole.lastname:''" type="email" [value]="userRole.lastname">
+                        </td>
+                    </tr>
+                    <tr class="row-div1 in-div-body" _ngcontent-c9>
+                        <td _ngcontent-c9 class="cell-div2">Email</td>
+                        <td _ngcontent-c9 class="cell-div2">
+                            <span *ngIf="editUserDetails? '':userRole.email">{{!editUserDetails?userRole.email:''}}</span>
+                            <input *ngIf="editUserDetails?userRole.email:''" type="email" [value]="userRole.email">
+                        </td>
+                    </tr>
+                    <tr class="row-div1 in-div-body" _ngcontent-c9>
+                        <td _ngcontent-c9 class="cell-div2">User Status</td>
+                        <td _ngcontent-c9 class="cell-div2">
+                            <span *ngIf="editUserDetails? '':userStatus">{{!editUserDetails?userStatus:''}}</span>
+                            <input *ngIf="editUserDetails?userStatus:''" type="email" [value]="userStatus">
+                        </td>
+                    </tr>
+                    <tr class="row-div1 in-div-body" _ngcontent-c9>
+                        <td _ngcontent-c9 class="cell-div2">Projects</td>
+                        <td _ngcontent-c9 class="cell-div2">
+                            <div *ngIf="this.disabledProject.length>0">
+                                <div *ngFor="let userProject of disabledProject">
+                                    <mat-checkbox [disabled]="editUserDetails?false:true" [checked]="userProject.select" (click)="updateUserProject($event,userProject,userProject.userProject)" >
+                                    {{userProject.projectName}}
+                                    </mat-checkbox>
+                                </div>
+                            </div> 
+                            
+                            
+                        </td>
+                    </tr>
+                    <tr class="row-div1 in-div-body" _ngcontent-c9>
+                        <td _ngcontent-c9 class="cell-div2">Create By</td>
+                        <td _ngcontent-c9 class="cell-div2">
+                            <span *ngIf="editUserDetails? '':userRole.createdBy">{{!editUserDetails?userRole.createdBy:''}}</span>
+                            <input *ngIf="editUserDetails?userRole.createdBy:''" type="email" [value]="userRole.createdBy">
+                        </td>
+                    </tr>
+                    <tr class="row-div1 in-div-body" _ngcontent-c9>
+                        <td _ngcontent-c9 class="cell-div2">Create On</td>
+                        <td _ngcontent-c9 class="cell-div2">
+                            <span *ngIf="editUserDetails? '':userRole.createdOn">{{!editUserDetails?userRole.createdOn:''}}</span>
+                            <input *ngIf="editUserDetails?userRole.createdOn:''" type="email" [value]="userRole.createdOn">
+                        </td>
+                    </tr>
+                    <tr class="row-div1 in-div-body" _ngcontent-c9>
+                        <td _ngcontent-c9 class="cell-div2">Last Modified By</td>
+                        <td _ngcontent-c9 class="cell-div2">
+                            <span *ngIf="editUserDetails? '':userRole.lastModifiedBy">{{!editUserDetails?userRole.lastModifiedBy:''}}</span>
+                            <input *ngIf="editUserDetails?userRole.lastModifiedBy:''" type="email" [value]="userRole.lastModifiedBy">
+                        </td>
+                    </tr>
+                    <tr class="row-div1 in-div-body" _ngcontent-c9>
+                        <td _ngcontent-c9 class="cell-div2">Last Modified On</td>
+                        <td _ngcontent-c9 class="cell-div2">
+                            <span *ngIf="editUserDetails? '':userRole.lastModifiedOn">{{!editUserDetails?userRole.lastModifiedOn:''}}</span>
+                            <input *ngIf="editUserDetails?userRole.lastModifiedOn:''" type="email" [value]="userRole.lastModifiedOn">
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

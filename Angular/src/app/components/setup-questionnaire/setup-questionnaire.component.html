@@ -1,0 +1,114 @@
+<mat-toolbar class="navControls">
+    <!--<a class="navControls__branding branding branding--compact active" routerlink="/home" routerlinkactive="active" href="/home">
+        <span class="branding_white">IPO Enabler</span>
+    </a>-->
+    <span (click)="Gotohome()" class="branding_white">IPO Enabler</span>
+    <div class="spacer"></div>
+    <ul>
+        <li>
+            <a href="#">Setup Questionnaire Library</a>
+            <ul class="name">
+                <li>
+                    <a href="#">Setup Questionnaire Library</a>
+                </li>
+                <li>
+                    <a href="#">Questionnaire Library</a>
+                </li>
+                <li>
+                    <a href="#">Questions </a>
+                </li>
+                <li>
+                    <a href="#">Project Overview</a>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="notification()">Notification</button>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="downloadPdf()">User Guide</button>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="openContact()">Contact</button>
+    <button mat-button *ngIf="displayUser" activeroute="nav__link--active" class="nav__link" (click)="displayUsers()">Users</button>
+    <a mat-button  activeroute="nav__link--active" class="nav__link" routerlink="/login" href="/login">Logout</a>
+  </mat-toolbar>
+<div class="tabHeader">
+    <button class="tabHeader__anchor tabHeader--active" (click)="GotoSetupQuestionnaire()">
+        <div class="tabHeader__title">
+            Setup Questionnaire Library
+        </div>
+    </button>
+    <button class="tabHeader__anchor tabHeader--active" >
+        <div class="tabHeader__title" (click)="GotoQuestions()">
+            Questions
+        </div>
+    </button>
+    <button *ngIf="displayUser" (click)="GotoProjectOverview()" class="tabHeader__anchor tabHeader--active" routerlink="/overview/profit-loss" routerlinkactive="tabHeader--active" href="/overview/profit-loss">
+        <div class="tabHeader__title">
+            Project Overview
+        </div>
+    </button>
+</div>
+<router-outlet></router-outlet>
+<div class="alignRight"> 
+    <button class="loginRegister__btn btn btn--secondary" (click)="addNewQuestion()">Add New Question</button>
+</div>
+<div (click)="ngOnInit()" class="login-container">
+    <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="form loginRegister__panel loginRegister__panel--form ng-dirty ng-touched ng-valid">
+        <h2 class="login_head"> Setup Questionnaire Library</h2>
+        <div class="form__group form__group--large">
+        </div>
+        <div class="form__group form__group--large">
+          <select class="form__input form__input--large ng-dirty ng-valid ng-touched" id="industry" name="industry" formcontrolname="industry" (ngModel)="setup.industry" (change)="changeIndustry($event)" style="height: 100%;width:100%">
+            <option [value]="user.id" *ngFor="let user of this.industries">
+              {{user.industryName}}
+            </option>
+          </select>
+        </div>
+        <div class="form__group form__group--large">
+          <select class="form__input form__input--large ng-dirty ng-valid ng-touched" id="functionalArea" name="functionalArea" formcontrolname="functionalArea" (ngModel)="setup.functionalArea" (change)="changeFunctionalArea($event)" style="height: 100%;width:100%">
+            <option [value]="user.id" *ngFor="let user of this.functionalAreas">
+              {{user.functionalAreaName}}
+            </option>
+          </select>
+        </div>
+      <button class="loginRegister__btn btn btn--secondary">Search</button>
+    </form>
+    
+</div>
+<div class="alignRight"> 
+    <button (click)="addQuestionnaire()" class="loginRegister__btn btn btn--secondary">Add Questionnaire</button>
+</div>
+<div *ngIf="displayQuestions" class="table-div adminTableList">
+    <div class="adminPanel admin-main-div">
+        <table class="adminPanel admin-main-div">
+            <thead>
+                <tr class="row-div head-div">
+                    <th class="cell-div3"> </th>
+                    <th class="cell-div4"> Question</th>
+                    <th class="cell-div"> Industry</th>
+                    <th class="cell-div"> Functional Area </th>
+                    <th class="cell-div"> Description </th>                  
+                </tr>
+            </thead>
+            <tbody class="body-div">
+                <tr *ngFor="let questionChecked of questionsChecked" class="row-div in-div-body">
+                    <th title="{{questionChecked.questionName}}" class="cell-div3">
+                        <mat-checkbox [checked]="questionChecked.checked" (change)="selectquestion($event,questionChecked.questionId)" >
+                            
+                        </mat-checkbox>
+                    </th>
+                    <th title="{{questionChecked.questionName}}" class="cell-div4">
+                        <span>{{questionChecked.questionName}}</span> 
+                    </th>
+                    <th title="{{industry.industryName}}" class="cell-div">
+                       <span>{{industry.industryName}}</span> 
+                    </th>
+                    <th title="{{functionalArea.functionalAreaName}}" class="cell-div">
+                        {{functionalArea.functionalAreaName}}
+                    </th>
+                    <th title="{{questionChecked.description}}" class="cell-div1">
+                        {{questionChecked.description}}
+                    </th>
+                </tr>
+         </tbody>
+        </table>
+    </div>
+</div>

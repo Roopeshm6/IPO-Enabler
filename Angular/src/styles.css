@@ -1,0 +1,81 @@
+/* You can add global styles to this file, and also import other style files */
+::-webkit-scrollbar-track {
+    background: #e5f4ff;
+    border: 1px #e5f4ff solid;
+    border-radius: 0px;
+    -webkit-box-shadow: 0 0 0px gray inset;
+    margin-top: 40px;
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background: rgb(0, 144, 255);
+}
+::-webkit-scrollbar-track {
+    background: #e5f4ff;
+    border: 1px #e5f4ff solid;
+    border-radius: 0px;
+    -webkit-box-shadow: 0 0 0px gray inset;
+    margin-top: 40px;
+}
+.k-state-focused ::selection, ::selection {
+    background: #0090ff;
+    color: #fff;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+table {
+    border-collapse: collapse;
+    font-size: 1em;
+}
+table {
+    border-collapse: separate;
+    text-indent: initial;
+    border-spacing: 2px;
+}
+table {
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 2px;
+    border-color: gray;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+.content-div {
+    margin: 0 -12px;
+    display: -webkit-box;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -moz-box-orient: horizontal;
+    -moz-box-direction: normal;
+    flex-flow: row;
+    -ms-flex-flow: row;
+    width: 100%;
+}
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background: rgb(0, 144, 255);
+}
+::-webkit-scrollbar-track {
+    background: #e5f4ff;
+    border: 1px #e5f4ff solid;
+    border-radius: 0px;
+    -webkit-box-shadow: 0 0 0px gray inset;
+    margin-top: 40px;
+}
+.k-state-focused ::selection, ::selection {
+    background: #0090ff;
+    color: #fff;
+}

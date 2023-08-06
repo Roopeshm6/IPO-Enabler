@@ -1,0 +1,17 @@
+<div class="login-container">
+    <form #registerForm="ngForm" (ngSubmit)="login(registerForm)"  class="form loginRegister__panel loginRegister__panel--form ng-dirty ng-touched ng-valid">
+      <h2 class="login_head">Register</h2>
+      <div class="form__group form__group--large">
+        <input class="form__input form__input--large ng-dirty ng-valid ng-touched" required id="firstName" name="firstName" formcontrolname="firstName" (ngModel)="register.firstName"  placeholder="First Name" type="email">
+      </div>
+      <div class="form__group form__group--large">
+        <input class="form__input form__input--large ng-dirty ng-valid ng-touched" required id="lastName" name="lastName" formcontrolname="lastName" (ngModel)="register.lastName"   placeholder="Last Name" type="email">
+      </div>
+      <div class="form__group form__group--large">
+        <input class="form__input form__input--large ng-dirty ng-valid ng-touched" required id="email" name="email" formcontrolname="email" (ngModel)="register.email"   placeholder="E-mail" type="email">
+      </div>
+      <div class="loginRegister__help">
+        <button class="loginRegister__btn btn btn--secondary">Register</button>
+      </div>
+    </form>
+</div>

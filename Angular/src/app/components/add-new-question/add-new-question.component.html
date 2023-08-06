@@ -1,0 +1,46 @@
+<mat-toolbar class="navControls">
+   <span (click)="Gotohome()" class="branding_white">IPO Enabler</span>
+    <div class="spacer"></div>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="notification()">Notification</button>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="downloadPdf()">User Guide</button>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="openContact()">Contact</button>
+    <button mat-button *ngIf="displayUser" activeroute="nav__link--active" class="nav__link" (click)="displayUsers()">Users</button>
+    <a mat-button  activeroute="nav__link--active" class="nav__link" routerlink="/login" href="/login">Logout</a>
+</mat-toolbar>  
+<div class="login-container">
+      <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="form loginRegister__panel loginRegister__panel--form ng-dirty ng-touched ng-valid">
+        <h2 class="login_head">Add New Project</h2>
+        <div class="form__group form__group--large">
+        </div>
+        <div class="form__group form__group--large">
+          <select class="form__input form__input--large ng-dirty ng-valid ng-touched" (change)="change($event)" style="height: 100%;width:100%">
+            <option [disabled]="true">
+              Select
+            </option>
+            <option [value]="name? name:user.industryName" *ngFor="let user of this.industries">
+              {{user.industryName}}
+            </option>
+          </select>
+        </div>
+        <div class="form__group form__group--large">
+          <select class="form__input form__input--large ng-dirty ng-valid ng-touched" (change)="changeFun($event)" style="height: 100%;width:100%">
+            <option [disabled]="true">
+              Select
+            </option>
+            <option [value]="nam? nam:user.functionalAreaName" *ngFor="let user of this.functionalAreas">
+              {{user.functionalAreaName}}
+            </option>
+          </select>
+        </div>
+        <div class="form__group form__group--large">
+          <textarea class="form__input form__input--large ng-dirty ng-valid ng-touched" (ngModel)="question.questionName"  id="question" name="question" formcontrolname="question" placeholder="Question" type="email"></textarea>
+        </div>
+        <div class="form__group form__group--large">
+          <textarea class="form__input form__input--large ng-dirty ng-valid ng-touched" (ngModel)="question.description" id="description" name="description" formcontrolname="description" placeholder="Description" type="email"></textarea>
+        </div>
+        <button class="loginRegister__btn btn btn--secondary">Submit</button>
+      </form>
+</div>
+   
+    
+  

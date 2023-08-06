@@ -1,0 +1,39 @@
+<mat-toolbar class="navControls">
+    <span (click)="Gotohome()">IPO Enabler</span>
+    <div class="spacer"></div>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="notification()">Notification</button>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="downloadPdf()">User Guide</button>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="openContact()">Contact</button>
+    <button mat-button *ngIf="displayUser" activeroute="nav__link--active" class="nav__link" (click)="displayUsers()">Users</button>
+    <a mat-button  activeroute="nav__link--active" class="nav__link" routerlink="/login" href="/login">Logout</a>
+</mat-toolbar> 
+<div class="admin-layout--flex admin-layout--fullWidth outer-div">
+    <div class="content-div admin-layout--hasFlexContainer">
+        <div class="table-div adminTableList">
+            <div class="adminPanel admin-main-div">
+                <table class="adminPanel admin-main-div">
+                    <thead>
+                        <tr class="row-div head-div">
+                            <th class="cell-div"> First Name </th>
+                            <th class="cell-div"> Last Name </th>
+                            <th class="cell-div"> Email </th>
+                            <!--<th class="cell-div"> Project </th>-->
+                        </tr>
+                    </thead>
+                    <tbody class="body-div">
+                        <tr *ngFor="let user of registerUsers" class="row-div in-div-body">
+                            <th class="cell-div">
+                               {{user.firstName}}
+                           </th>
+                           <th class="cell-div">
+                               {{user.lastName}}
+                           </th>
+                           <th class="cell-div">
+                               {{user.email}}
+                           </th>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

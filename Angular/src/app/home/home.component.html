@@ -1,0 +1,25 @@
+<mat-toolbar (click)="ngOnInit()" class="navControls">
+    <span >IPO Enabler</span>
+    <div class="spacer"></div>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="notification()">Notification</button>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="downloadPdf()">User Guide</button>
+    <button mat-button activeroute="nav__link--active" class="nav__link" (click)="openContact()">Contact</button>
+    <button *ngIf="displayUser" mat-button  activeroute="nav__link--active" class="nav__link" (click)="displayUsers()">Users</button>
+    <a mat-button  activeroute="nav__link--active" class="nav__link" routerlink="/login" href="/login">Logout</a>
+</mat-toolbar>
+<div (click)="ngOnInit()" class="scenario__list widgets__cluster widgets__showPointer" *ngFor="let project of projects">
+    <div class="widgets__item widgets__item--wide widgets__item--inactive scenario_addnewbox" title="{{project.projectName}}">
+        <div class="scenario_addnew">
+            <span (click)="gotoQuestionnaire(project)" class="k-icon1 k-i-plus-outline k-icon-80 k-icon-black" >{{project.projectName}}</span>
+        </div>
+    </div>
+</div>
+<div *ngIf="displayUser" (click)="ngOnInit()" class="scenario__list widgets__cluster widgets__showPointer">
+    <div class="widgets__item widgets__item--wide widgets__item--inactive scenario_addnewbox" title="Add New Project">
+        <div class="scenario_addnew">
+            <img class="k-icon k-i-plus-outline k-icon-80 k-icon-black" (click)="addProject()" src="../../assets/addProject.png" title="Add new project">
+        </div>
+    </div>
+</div>
+<!--<p class="k-icon k-i-plus-outline k-icon-80 k-icon-black" title="Add new project">Add new Project
+</p>-->
